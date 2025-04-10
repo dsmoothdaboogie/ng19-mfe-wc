@@ -5,7 +5,8 @@ module.exports = withNativeFederation({
   name: 'ng19-mfe-components',
 
   exposes: {
-    './web-components': './src/bootstrap-web-components.ts',
+    './widget-a': './src/bootstrap-widget-a.ts',
+    './widget-b': './src/bootstrap-widget-b.ts',
   },
 
   shared: {
@@ -15,7 +16,6 @@ module.exports = withNativeFederation({
       requiredVersion: 'auto',
       includeSecondaries: true, 
     }),
-    // Explicitly add secondary entry points that might be missed
     '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
 

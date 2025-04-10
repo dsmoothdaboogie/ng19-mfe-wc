@@ -7,7 +7,8 @@
   "files": [
     "src/main.ts",
     "src/bootstrap.ts",
-    "src/bootstrap-web-components.ts"
+    "src/bootstrap-widget-a.ts",
+    "src/bootstrap-widget-b.ts"
   ],
   "include": [
     "src/**/*.d.ts"
