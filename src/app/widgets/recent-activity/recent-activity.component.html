@@ -1,0 +1,16 @@
+<div class="widget-container">
+  <h3>{{ title }}</h3>
+  <div *ngIf="isLoading" class="loading">Loading activity...</div>
+  <div *ngIf="error" class="error">Error: {{ error }}</div>
+  <ul *ngIf="!isLoading && !error && activities.length > 0" class="activity-list">
+    <li *ngFor="let item of activities">
+      <span class="timestamp">{{ item.timestamp | date:'shortTime' }}</span>
+      <span class="description">
+        <strong *ngIf="item.user">{{ item.user }}</strong> {{ item.description }}
+      </span>
+    </li>
+  </ul>
+  <div *ngIf="!isLoading && !error && activities.length === 0">
+    No recent activity.
+  </div>
+</div> 
