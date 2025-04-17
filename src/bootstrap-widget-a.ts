@@ -1,7 +1,7 @@
 import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
 import { ApplicationRef } from '@angular/core';
-import { WidgetAComponent } from './app/components/widget-a/widget-a.component';
+import { WidgetAComponent } from './app/widgets/widget-a/widget-a.component';
 
 console.log('bootstrap-widget-a.ts executing');
 

@@ -1,18 +1,34 @@
 import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-import { ApplicationRef } from '@angular/core';
-import { WidgetBComponent } from './app/components/widget-b/widget-b.component';
+import { ApplicationRef, Injector } from '@angular/core'; // Import ApplicationRef and Injector
 
-console.log('bootstrap-widget-b.ts executing');
+import { WidgetBComponent } from './app/widgets/widget-b/widget-b.component';
 
+// Define the custom element tag name
+const WIDGET_B_TAG_NAME = 'widget-b-element';
+
+// IIFE to bootstrap and define the element
 (async () => {
-  try {
-    const app: ApplicationRef = await createApplication();
-    console.log('[bootstrap-widget-b] Minimal Angular AppRef created.');
-    if (!customElements.get('widget-b-element')) {
-      const WidgetBElement = createCustomElement(WidgetBComponent, { injector: app.injector });
-      customElements.define('widget-b-element', WidgetBElement);
-      console.log('[bootstrap-widget-b] Defined widget-b-element');
+    console.log(`[${WIDGET_B_TAG_NAME}] bootstrap executing...`);
+    if (customElements.get(WIDGET_B_TAG_NAME)) {
+        console.log(`[${WIDGET_B_TAG_NAME}] already defined.`);
+        return;
     }
-  } catch (err) { console.error('[bootstrap-widget-b] Error:', err); }
+    try {
+        // Create minimal app context to get an injector
+        const appRef: ApplicationRef = await createApplication();
+        const injector: Injector = appRef.injector;
+        console.log(`[${WIDGET_B_TAG_NAME}] Minimal AppRef created.`);
+
+        // Create and define the custom element
+        const element = createCustomElement(WidgetBComponent, { injector });
+        customElements.define(WIDGET_B_TAG_NAME, element);
+        console.log(`[${WIDGET_B_TAG_NAME}] Defined successfully.`);
+
+        // Optional: Destroy the temporary bootstrap app 
+        // appRef.destroy(); 
+
+    } catch (err) {
+        console.error(`[${WIDGET_B_TAG_NAME}] Error:', err`);
+    }
 })(); 

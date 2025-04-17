@@ -7,6 +7,9 @@ module.exports = withNativeFederation({
   exposes: {
     './widget-a': './src/bootstrap-widget-a.ts',
     './widget-b': './src/bootstrap-widget-b.ts',
+    './user-list-widget': './src/bootstrap-user-list.ts',
+    './stats-summary-widget': './src/bootstrap-stats-summary.ts',
+    './recent-activity-widget': './src/bootstrap-recent-activity.ts',
   },
 
   shared: {
