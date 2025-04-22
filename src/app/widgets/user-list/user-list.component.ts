@@ -34,22 +34,21 @@ export class UserListComponent implements OnInit {
   fetchUsers(): void {
     this.isLoading = true;
     this.error = null;
-    console.log(`UserListComponent: Fetching users from ${this.apiUrl || 'mock data'}...`);
+    console.log(`UserListComponent: Fetching users. apiUrl provided: ${!!this.apiUrl}`);
 
     // Simulate API call or use mock data
-    if (this.apiUrl) {
-      // Placeholder for actual fetch logic
-      console.warn('API fetching not implemented yet, using mock data.');
-      this.users = this.getMockUsers();
-      this.isLoading = false;
-      // fetch(this.apiUrl).then(...).catch(...);
-    } else {
-      // Use mock data
-      setTimeout(() => { // Simulate delay
+    // Use mock data (logic changed to select based on apiUrl)
+    setTimeout(() => { // Simulate delay
+      if (this.apiUrl) {
+        console.log('UserListComponent: Using alternative mock users because apiUrl was provided.');
+        this.users = this.getAlternativeMockUsers();
+      } else {
+        console.log('UserListComponent: Using default mock users because apiUrl was not provided.');
         this.users = this.getMockUsers();
-        this.isLoading = false;
-      }, 500);
-    }
+      }
+      this.isLoading = false;
+    }, 500);
+    // REMOVE old if/else block related to apiUrl
   }
 
   private getMockUsers(): User[] {
@@ -58,6 +57,16 @@ export class UserListComponent implements OnInit {
       { id: 2, name: 'Bob Johnson', email: 'bob.j@sample.net', status: 'Active' },
       { id: 3, name: 'Charlie Brown', email: 'charlie@domain.org', status: 'Inactive' },
       { id: 4, name: 'Diana Prince', email: 'diana@themyscira.gov', status: 'Active' },
+    ];
+  }
+
+  // Add a second mock data function
+  private getAlternativeMockUsers(): User[] {
+    console.log('UserListComponent: Generating alternative mock users.');
+    return [
+      { id: 101, name: 'Peter Parker', email: 'p.parker@dailybugle.com', status: 'Active' },
+      { id: 102, name: 'Mary Jane Watson', email: 'mj.watson@example.com', status: 'Active' },
+      { id: 103, name: 'Norman Osborn', email: 'norman@oscorp.biz', status: 'Inactive' },
     ];
   }
 } 
